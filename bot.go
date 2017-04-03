@@ -70,6 +70,12 @@ func startBot(token string, webhookConf *WebhookConfig, updateChats []int64, gov
 		log.Println("Running on Poll")
 	}
 
+	// Send online status
+	for _, chatID := range updateChats {
+		msg := tgbotapi.NewMessage(chatID, "Bot connected to this chat")
+		bot.Send(msg)
+	}
+
 	// Government Updates
 	go func() {
 		for {
